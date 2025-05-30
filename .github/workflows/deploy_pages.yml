@@ -22,6 +22,7 @@ env:
   SCENES: 'RSAPresentation'  # Space-separated list of scenes to render
   USES_TEX: false  # true or false - disabling this will make the action run faster
   DISPLAY: :99  # Do not touch this
+  CHROME_BIN: /usr/bin/chromium-browser
 
 jobs:
   # Single deploy job since we're just deploying
@@ -91,6 +92,11 @@ jobs:
 
     - name: Install Python dependencies
       run: pip install -r requirements.txt
+
+    - name: Install Chromium for slides conversion
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser
 
     - name: Build HTML
       run: |
